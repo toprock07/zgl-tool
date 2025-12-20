@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ZLG Prediction Tool</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<h2>ZLG Prediction Tool</h2>
+
+<div class="filters">
+    <label>Max Draws (0): 
+        <select id="maxDraws">
+            <option value="5">5</option>
+            <option value="6" selected>6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+    </label>
+
+    <label>Min Draws (0): 
+        <select id="minDraws">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2" selected>2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+        </select>
+    </label>
+
+    <label>Max Consecutive Draws: 
+        <select id="maxConsecutiveDraws">
+            <option value="3">3</option>
+            <option value="4" selected>4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+        </select>
+    </label>
+
+    <br><br>
+    <strong>Group Filters (Draws):</strong><br>
+
+    <label>Group 1 (1-8) Min Draws: 
+        <select id="minDrawsGroup1">
+            <option value="1">1</option>
+            <option value="2" selected>2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+    </label>
+
+    <label>Group 1 (1-8) Max Draws: 
+        <select id="maxDrawsGroup1">
+            <option value="4">4</option>
+            <option value="5" selected>5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+        </select>
+    </label>
+
+    <label>Group 2 (9-15) Min Draws: 
+        <select id="minDrawsGroup2">
+            <option value="0">0</option>
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+    </label>
+
+    <label>Group 2 (9-15) Max Draws: 
+        <select id="maxDrawsGroup2">
+            <option value="2">2</option>
+            <option value="3" selected>3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+    </label>
+
+    <label>Max Home Wins (1): 
+        <select id="maxHomeWins">
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10" selected>10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="15">No Limit</option>
+        </select>
+    </label>
+
+    <label>Min Away Wins (2): 
+        <select id="minAwayWins">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2" selected>2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+    </label>
+
+    <br><br>
+    <span id="filterInfo"></span>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Home Team</th>
+            <th>Away Team</th>
+            <th>Prediction</th>
+        </tr>
+    </thead>
+    <tbody id="matchesBody"></tbody>
+</table>
+
+<br>
+
+<div class="results-check">
+    <strong>Paste Official Results Here (15 numbers, space-separated):</strong><br>
+    <input type="text" id="officialResults" placeholder="e.g. 1 0 2 1 1 0 2 1 0 2 1 1 0 2 1">
+    <span id="checkFeedback"></span>
+</div>
+
+<div class="buttons">
+    <button onclick="generateCombinations()">Generate Filtered Combinations</button>
+    <button onclick="checkResults()" id="checkButton" disabled>Check Results</button>
+    <button onclick="clearSelections()">Clear All</button>
+    <button onclick="copyToClipboard()" id="copyButton" disabled>Copy Results to Clipboard</button>
+    <button onclick="downloadCSV()" id="csvButton" disabled>Download as CSV</button>
+    <span id="copyFeedback"></span>
+</div>
+
+<h3>Results</h3>
+<pre id="output"></pre>
+
+<script src="script.js"></script>
+</body>
+</html>

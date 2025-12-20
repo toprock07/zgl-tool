@@ -1,0 +1,107 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    background-color: #f5f5f5;
+}
+
+h2 {
+    color: #2c3e50;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #34495e;
+    color: white;
+}
+
+.choices label {
+    margin-right: 12px;
+    font-weight: bold;
+}
+
+.filters {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #ecf0f1;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.filters label {
+    margin-right: 25px;
+    font-weight: bold;
+    display: inline-block;
+    min-width: 180px;
+}
+
+.filters select {
+    padding: 8px;
+    font-size: 16px;
+}
+
+.results-check {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #d5dbe8;
+    border-radius: 10px;
+}
+
+.results-check input[type="text"] {
+    width: 70%;
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 8px;
+}
+
+.buttons {
+    margin: 25px 0;
+}
+
+button {
+    padding: 12px 20px;
+    margin-right: 12px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+button:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
+
+#copyFeedback, #checkFeedback {
+    color: #27ae60;
+    font-weight: bold;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.highlight-15 { color: #e67e22; font-weight: bold; }
+.highlight-14 { color: #3498db; font-weight: bold; }
+.highlight-13 { color: #27ae60; font-weight: bold; }
+.highlight-12 { color: #9b59b6; font-weight: bold; }
+
+#filterInfo {
+    font-style: italic;
+    color: #7f8c8d;
+}

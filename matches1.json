@@ -1,0 +1,77 @@
+[
+  {
+    "match": 1,
+    "home": "Kocaelispor",
+    "away": "Antalyaspor"
+  },
+  {
+    "match": 2,
+    "home": "Konyaspor",
+    "away": "Kayserispor"
+  },
+  {
+    "match": 3,
+    "home": "Eyüpspor",
+    "away": "Fenerbahçe A.Ş."
+  },
+  {
+    "match": 4,
+    "home": "Beşiktaş A.Ş.",
+    "away": "Çaykur Rizespor A.Ş."
+  },
+  {
+    "match": 5,
+    "home": "Alanyaspor",
+    "away": "Fatih Karagümrük"
+  },
+  {
+    "match": 6,
+    "home": "Başakşehir FK",
+    "away": "Gaziantep F.K. A.Ş."
+  },
+  {
+    "match": 7,
+    "home": "Galatasaray A.Ş.",
+    "away": "Kasımpaşa A.Ş."
+  },
+  {
+    "match": 8,
+    "home": "Göztepe A.Ş.",
+    "away": "Samsunspor A.Ş."
+  },
+  {
+    "match": 9,
+    "home": "Gençlerbirliği",
+    "away": "Trabzonspor A.Ş."
+  },
+  {
+    "match": 10,
+    "home": "Leipzig",
+    "away": "B. Leverkusen"
+  },
+  {
+    "match": 11,
+    "home": "Tottenham",
+    "away": "Liverpool"
+  },
+  {
+    "match": 12,
+    "home": "Aston Villa",
+    "away": "Manchester United"
+  },
+  {
+    "match": 13,
+    "home": "Villarreal",
+    "away": "Barcelona"
+  },
+  {
+    "match": 14,
+    "home": "Real Betis",
+    "away": "Getafe"
+  },
+  {
+    "match": 15,
+    "home": "Juventus",
+    "away": "AS Roma"
+  }
+]
