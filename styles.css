@@ -104,4 +104,17 @@ button:disabled {
 #filterInfo {
     font-style: italic;
     color: #7f8c8d;
+
+}
+
+.csv-upload {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #e8f4fd;
+    border-radius: 10px;
+}
+
+.csv-upload input[type="file"] {
+    margin-top: 8px;
+    font-size: 16px;
 }
