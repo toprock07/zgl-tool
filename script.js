@@ -84,12 +84,12 @@ function generateCombinations() {
         const homes = combo.filter(r => r === "1").length;
         const aways = combo.filter(r => r === "2").length;
         const tooManyConsec = hasTooManyConsecutiveDraws(combo);
-	
-	// NEW: Group draw counts
+
+        // NEW: Group draw counts
         const drawsGroup1 = combo.slice(0, 8).filter(r => r === "0").length;   // Matches 1–8
         const drawsGroup2 = combo.slice(8, 15).filter(r => r === "0").length;  // Matches 9–15
 
-       return draws <= maxDrawsAllowed &&
+        return draws <= maxDrawsAllowed &&
                draws >= minDrawsAllowed &&
                !tooManyConsec &&
                homes <= maxHome &&
@@ -101,16 +101,16 @@ function generateCombinations() {
     });
 
     let output = `Raw combinations: ${combinations.length.toLocaleString()}\n`;
-	output += `Filtered down to: ${currentFilteredCombinations.length.toLocaleString()} columns\n`;
-	output += `Estimated cost: ~${(currentFilteredCombinations.length * 10).toLocaleString()} TL\n\n`;
+    output += `Filtered down to: ${currentFilteredCombinations.length.toLocaleString()} columns\n`;
+    output += `Estimated cost: ~${(currentFilteredCombinations.length * 10).toLocaleString()} TL\n\n`;
 
-	output += `Active filters:\n`;
-	output += `  • Global draws: ${minDrawsAllowed}–${maxDrawsAllowed}\n`;
-	output += `  • Group 1 (1–8): ${minDrawsGroup1}–${maxDrawsGroup1} draws\n`;
-	output += `  • Group 2 (9–15): ${minDrawsGroup2}–${maxDrawsGroup2} draws\n`;
-	output += `  • Max ${maxConsecDraws} consecutive draws\n`;
-	output += `  • Max ${maxHome === 15 ? "unlimited" : maxHome} home wins\n`;
-	output += `  • Min ${minAway} away wins\n\n`;
+    output += `Active filters:\n`;
+    output += `  • Global draws: ${minDrawsAllowed}–${maxDrawsAllowed}\n`;
+    output += `  • Group 1 (1–8): ${minDrawsGroup1}–${maxDrawsGroup1} draws\n`;
+    output += `  • Group 2 (9–15): ${minDrawsGroup2}–${maxDrawsGroup2} draws\n`;
+    output += `  • Max ${maxConsecDraws} consecutive draws\n`;
+    output += `  • Max ${maxHome === 15 ? "unlimited" : maxHome} home wins\n`;
+    output += `  • Min ${minAway} away wins\n\n`;
 
     if (currentFilteredCombinations.length === 0) {
         output += "No combinations left! Try loosening some filters.";
@@ -243,11 +243,6 @@ function downloadCSV() {
         csvContent += row + "\n";
     });
 
-	// Enable Check CSV button when a file is selected
-	document.getElementById("csvFileInput").addEventListener("change", function() {
-    document.getElementById("checkCSVButton").disabled = this.files.length === 0;
-	});
-
     // Create downloadable file
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
     const link = document.createElement("a");
@@ -258,8 +253,21 @@ function downloadCSV() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+}
 
-	function checkCSVResults() {
+// NEW: Enable/disable Check CSV button when file is selected
+document.addEventListener("DOMContentLoaded", function() {
+    const fileInput = document.getElementById("csvFileInput");
+    const checkButton = document.getElementById("checkCSVButton");
+
+    if (fileInput && checkButton) {
+        fileInput.addEventListener("change", function() {
+            checkButton.disabled = this.files.length === 0;
+        });
+    }
+});
+
+function checkCSVResults() {
     const fileInput = document.getElementById("csvFileInput");
     const officialInput = document.getElementById("officialResults").value.trim();
 
@@ -340,19 +348,3 @@ function downloadCSV() {
 
     reader.readAsText(file);
 }
-
-	// Enable/disable Check CSV button when file is selected
-	document.addEventListener("DOMContentLoaded", function() {
-    const fileInput = document.getElementById("csvFileInput");
-    const checkButton = document.getElementById("checkCSVButton");
-
-    if (fileInput && checkButton) {
-        fileInput.addEventListener("change", function() {
-            checkButton.disabled = this.files.length === 0;
-        });
-    }
-});
-
-}
-
-
