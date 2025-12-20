@@ -253,4 +253,87 @@ function downloadCSV() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+
+	function checkCSVResults() {
+    const fileInput = document.getElementById("csvFileInput");
+    const officialInput = document.getElementById("officialResults").value.trim();
+
+    if (!fileInput.files.length) {
+        alert("Please upload a CSV file first!");
+        return;
+    }
+
+    if (!officialInput) {
+        alert("Please paste the official 15 results first!");
+        return;
+    }
+
+    const official = officialInput.split(/\s+/).filter(s => s !== "");
+    if (official.length !== 15 || official.some(r => !["0","1","2"].includes(r))) {
+        alert("Invalid official results! Must be 15 numbers (0/1/2) separated by spaces.");
+        return;
+    }
+
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+        const text = e.target.result;
+        const lines = text.split('\n').filter(line => line.trim() !== '');
+        const headers = lines[0].split(',');
+
+        if (headers.length < 16 || !headers.includes('Column')) {
+            alert("Invalid CSV! Must have 'Column' + 'Match1' to 'Match15'.");
+            return;
+        }
+
+        const predictions = [];
+        for (let i = 1; i < lines.length; i++) {
+            const row = lines[i].split(',');
+            const matches = row.slice(1, 16); // Match1 to Match15
+            if (matches.length === 15) {
+                predictions.push(matches);
+            }
+        }
+
+        let hitsAbove12 = 0, hits13 = 0, hits14 = 0, hits15 = 0;
+        let winningDetails = [];
+
+        predictions.forEach((combo, idx) => {
+            let correct = 0;
+            for (let j = 0; j < 15; j++) {
+                if (combo[j] === official[j]) correct++;
+            }
+
+            if (correct > 12) {
+                hitsAbove12++;
+                if (correct === 13) hits13++;
+                else if (correct === 14) hits14++;
+                else if (correct === 15) hits15++;
+                winningDetails.push(`Column ${idx + 1}: ${combo.join(" ")} → ${correct} correct`);
+            }
+        });
+
+        let output = `<strong>CSV CHECK SUMMARY</strong>\n`;
+        output += `Total columns in CSV: ${predictions.length}\n`;
+        output += `Columns with more than 12 correct: ${hitsAbove12}\n`;
+        output += ` - 13 correct: ${hits13}\n`;
+        output += ` - 14 correct: ${hits14}\n`;
+        output += ` - 15 correct: ${hits15}\n\n`;
+
+        if (winningDetails.length > 0) {
+            output += `<strong>Good columns (>12 correct):</strong>\n`;
+            output += winningDetails.join("\n") + "\n";
+        } else {
+            output += "No columns with more than 12 correct.\n";
+        }
+
+        document.getElementById("output").innerHTML = output;
+        document.getElementById("checkFeedback").textContent = "✓ CSV checked!";
+        setTimeout(() => document.getElementById("checkFeedback").textContent = "", 4000);
+    };
+
+    reader.readAsText(file);
+}
+
 }
