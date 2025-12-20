@@ -341,5 +341,18 @@ function downloadCSV() {
     reader.readAsText(file);
 }
 
+	// Enable/disable Check CSV button when file is selected
+	document.addEventListener("DOMContentLoaded", function() {
+    const fileInput = document.getElementById("csvFileInput");
+    const checkButton = document.getElementById("checkCSVButton");
+
+    if (fileInput && checkButton) {
+        fileInput.addEventListener("change", function() {
+            checkButton.disabled = this.files.length === 0;
+        });
+    }
+});
+
 }
+
 
