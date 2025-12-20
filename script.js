@@ -243,6 +243,11 @@ function downloadCSV() {
         csvContent += row + "\n";
     });
 
+	// Enable Check CSV button when a file is selected
+	document.getElementById("csvFileInput").addEventListener("change", function() {
+    document.getElementById("checkCSVButton").disabled = this.files.length === 0;
+	});
+
     // Create downloadable file
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
     const link = document.createElement("a");
@@ -337,3 +342,4 @@ function downloadCSV() {
 }
 
 }
+
