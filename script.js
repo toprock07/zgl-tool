@@ -255,8 +255,6 @@ function downloadCSV() {
     document.body.removeChild(link);
 }
 
-});
-
 function checkCSVResults() {
     const fileInput = document.getElementById("csvFileInput");
     const officialInput = document.getElementById("officialResults").value.trim();
@@ -336,8 +334,10 @@ function checkCSVResults() {
         setTimeout(() => document.getElementById("checkFeedback").textContent = "", 4000);
     };
 
-    
-// NEW: Enable/disable Check CSV button when file is selected
+    reader.readAsText(file);
+}
+
+// Enable/disable Check CSV button when file is selected
 document.addEventListener("DOMContentLoaded", function() {
     const fileInput = document.getElementById("csvFileInput");
     const checkButton = document.getElementById("checkCSVButton");
@@ -347,7 +347,4 @@ document.addEventListener("DOMContentLoaded", function() {
             checkButton.disabled = this.files.length === 0;
         });
     }
-
-    reader.readAsText(file);
-}
-
+});
