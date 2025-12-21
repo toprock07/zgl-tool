@@ -341,7 +341,7 @@ async function loadLatestWeek() {
     try {
         // Use a CORS proxy to fetch Misli page (free, no key)
         const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-        const targetUrl = "https://www.misli.com/sportoto/"; // Or /mac-sonuclari for results
+        const targetUrl = "https://www.misli.com/spor-toto/"; // Or /mac-sonuclari for results
         const response = await fetch(proxyUrl + targetUrl);
         const html = await response.text();
 
@@ -400,5 +400,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
 
 
