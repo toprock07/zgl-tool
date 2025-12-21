@@ -339,9 +339,9 @@ function checkCSVResults() {
 
 async function loadLatestWeek() {
     try {
-        // Use a CORS proxy to fetch Nesine page (free, no key)
+        // Use a CORS proxy to fetch Misli page (free, no key)
         const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-        const targetUrl = "https://www.nesine.com/sportoto/program"; // Or /mac-sonuclari for results
+        const targetUrl = "https://www.misli.com/sportoto/"; // Or /mac-sonuclari for results
         const response = await fetch(proxyUrl + targetUrl);
         const html = await response.text();
 
@@ -349,7 +349,7 @@ async function loadLatestWeek() {
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, "text/html");
 
-        // Find match rows (Nesine uses <tr> with class for matches)
+        // Find match rows (Misli uses <tr> with class for matches)
         const matchRows = doc.querySelectorAll("tr.match-row"); // Adjust selector based on real page
         if (matchRows.length !== 15) {
             alert("Could not find 15 matches! Check site or try again.");
@@ -400,4 +400,5 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
 
