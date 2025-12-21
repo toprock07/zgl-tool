@@ -337,6 +337,58 @@ function checkCSVResults() {
     reader.readAsText(file);
 }
 
+async function loadLatestWeek() {
+    try {
+        // Use a CORS proxy to fetch Nesine page (free, no key)
+        const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+        const targetUrl = "https://www.nesine.com/sportoto/program"; // Or /mac-sonuclari for results
+        const response = await fetch(proxyUrl + targetUrl);
+        const html = await response.text();
+
+        // Parse HTML
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+
+        // Find match rows (Nesine uses <tr> with class for matches)
+        const matchRows = doc.querySelectorAll("tr.match-row"); // Adjust selector based on real page
+        if (matchRows.length !== 15) {
+            alert("Could not find 15 matches! Check site or try again.");
+            return;
+        }
+
+        const matches = [];
+        matchRows.forEach(row => {
+            const home = row.querySelector(".home-team").textContent.trim();
+            const away = row.querySelector(".away-team").textContent.trim();
+            matches.push({ home, away });
+        });
+
+        // Populate table (same as loadMatches)
+        const tbody = document.getElementById("matchesBody");
+        tbody.innerHTML = "";
+
+        matches.forEach((match, index) => {
+            const i = index + 1;
+            tbody.insertAdjacentHTML("beforeend", `
+                <tr>
+                    <td>${i}</td>
+                    <td>${match.home}</td>
+                    <td>${match.away}</td>
+                    <td class="choices">
+                        <label><input type="checkbox" name="match${i}" value="1"> 1</label>
+                        <label><input type="checkbox" name="match${i}" value="0"> 0</label>
+                        <label><input type="checkbox" name="match${i}" value="2"> 2</label>
+                    </td>
+                </tr>
+            `);
+        });
+
+        alert("Latest week loaded successfully!");
+    } catch (error) {
+        alert("Error loading latest week: " + error.message + "\nTry refreshing or use manual JSON.");
+    }
+}
+
 // Enable/disable Check CSV button when file is selected
 document.addEventListener("DOMContentLoaded", function() {
     const fileInput = document.getElementById("csvFileInput");
@@ -348,3 +400,4 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
