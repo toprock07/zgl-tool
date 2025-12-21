@@ -339,31 +339,33 @@ function checkCSVResults() {
 
 async function loadLatestWeek() {
     try {
-        // Use a CORS proxy to fetch Misli page (free, no key)
-        const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-        const targetUrl = "https://www.misli.com/spor-toto/"; // Or /mac-sonuclari for results
-        const response = await fetch(proxyUrl + targetUrl);
+        const targetUrl = "https://www.sportoto.gov.tr/spor-toto-listeler";
+        const response = await fetch(targetUrl);
         const html = await response.text();
 
-        // Parse HTML
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, "text/html");
 
-        // Find match rows (Misli uses <tr> with class for matches)
-        const matchRows = doc.querySelectorAll("tr.match-row"); // Adjust selector based on real page
-        if (matchRows.length !== 15) {
-            alert("Could not find 15 matches! Check site or try again.");
+        // Sportoto.gov.tr uses a table with matches
+        const rows = doc.querySelectorAll("table tr"); // Find all rows
+        const matches = [];
+
+        // Skip header row and extract matches (adjust if needed)
+        for (let i = 1; i < rows.length; i++) {
+            const cells = rows[i].querySelectorAll("td");
+            if (cells.length >= 3) {
+                const home = cells[1]?.textContent.trim() || "Home";
+                const away = cells[2]?.textContent.trim() || "Away";
+                matches.push({ home, away });
+            }
+        }
+
+        if (matches.length !== 15) {
+            alert("Could not find exactly 15 matches on Sportoto.gov.tr. Page may have changed.");
             return;
         }
 
-        const matches = [];
-        matchRows.forEach(row => {
-            const home = row.querySelector(".home-team").textContent.trim();
-            const away = row.querySelector(".away-team").textContent.trim();
-            matches.push({ home, away });
-        });
-
-        // Populate table (same as loadMatches)
+        // Populate table
         const tbody = document.getElementById("matchesBody");
         tbody.innerHTML = "";
 
@@ -383,9 +385,10 @@ async function loadLatestWeek() {
             `);
         });
 
-        alert("Latest week loaded successfully!");
+        alert("Latest Spor Toto week loaded from official site!");
     } catch (error) {
-        alert("Error loading latest week: " + error.message + "\nTry refreshing or use manual JSON.");
+        alert("Error loading from official site: " + error.message + "\nFalling back to local JSON.");
+        loadLocalMatches(); // Your fallback function
     }
 }
 
@@ -400,6 +403,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
 
 
 
