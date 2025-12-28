@@ -341,6 +341,67 @@ async function loadLatestWeek() {
     try {
         const targetUrl = "https://www.sportoto.gov.tr/spor-toto-listeler";
         const response = await fetch(targetUrl);
+        if (!response.ok) throw new Error("Network error");
+        const html = await response.text();
+
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+
+        // The matches are in <div class="col-md-12"> or simple <p>/<li>, but reliable: look for text lines with numbers
+        const text = doc.body.textContent || "";
+        const lines = text.split('\n').map(l => l.trim()).filter(l => l.match(/^\d+\./));
+
+        if (lines.length < 15) {
+            alert("Could not find 15 matches. Page format may have changed.");
+            return;
+        }
+
+        const matches = [];
+        for (let i = 0; i < 15; i++) {
+            const line = lines[i];
+            const matchText = line.replace(/^\d+\.\s*/, '').trim(); // Remove "1. " etc.
+            const parts = matchText.split(' - ');
+            if (parts.length === 2) {
+                matches.push({ home: parts[0].trim(), away: parts[1].trim() });
+            }
+        }
+
+        if (matches.length !== 15) {
+            alert("Parsing failed — try manual refresh.");
+            return;
+        }
+
+        // Populate table
+        const tbody = document.getElementById("matchesBody");
+        tbody.innerHTML = "";
+
+        matches.forEach((match, index) => {
+            const i = index + 1;
+            tbody.insertAdjacentHTML("beforeend", `
+                <tr>
+                    <td>${i}</td>
+                    <td>${match.home}</td>
+                    <td>${match.away}</td>
+                    <td class="choices">
+                        <label><input type="checkbox" name="match${i}" value="1"> 1</label>
+                        <label><input type="checkbox" name="match${i}" value="0"> 0</label>
+                        <label><input type="checkbox" name="match${i}" value="2"> 2</label>
+                    </td>
+                </tr>
+            `);
+        });
+
+        alert("Latest Spor Toto week loaded from official site!");
+    } catch (error) {
+        alert("Error loading official list: " + error.message + "\nUsing local JSON fallback.");
+        loadLocalMatches(); // Your original JSON load
+    }
+}
+
+async function loadLatestWeek() {
+    try {
+        const targetUrl = "https://www.sportoto.gov.tr/spor-toto-listeler";
+        const response = await fetch(targetUrl);
         const html = await response.text();
 
         const parser = new DOMParser();
@@ -403,6 +464,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
 
 
 
