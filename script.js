@@ -398,61 +398,6 @@ async function loadLatestWeek() {
     }
 }
 
-async function loadLatestWeek() {
-    try {
-        const targetUrl = "https://www.sportoto.gov.tr/spor-toto-listeler";
-        const response = await fetch(targetUrl);
-        const html = await response.text();
-
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, "text/html");
-
-        // Sportoto.gov.tr uses a table with matches
-        const rows = doc.querySelectorAll("table tr"); // Find all rows
-        const matches = [];
-
-        // Skip header row and extract matches (adjust if needed)
-        for (let i = 1; i < rows.length; i++) {
-            const cells = rows[i].querySelectorAll("td");
-            if (cells.length >= 3) {
-                const home = cells[1]?.textContent.trim() || "Home";
-                const away = cells[2]?.textContent.trim() || "Away";
-                matches.push({ home, away });
-            }
-        }
-
-        if (matches.length !== 15) {
-            alert("Could not find exactly 15 matches on Sportoto.gov.tr. Page may have changed.");
-            return;
-        }
-
-        // Populate table
-        const tbody = document.getElementById("matchesBody");
-        tbody.innerHTML = "";
-
-        matches.forEach((match, index) => {
-            const i = index + 1;
-            tbody.insertAdjacentHTML("beforeend", `
-                <tr>
-                    <td>${i}</td>
-                    <td>${match.home}</td>
-                    <td>${match.away}</td>
-                    <td class="choices">
-                        <label><input type="checkbox" name="match${i}" value="1"> 1</label>
-                        <label><input type="checkbox" name="match${i}" value="0"> 0</label>
-                        <label><input type="checkbox" name="match${i}" value="2"> 2</label>
-                    </td>
-                </tr>
-            `);
-        });
-
-        alert("Latest Spor Toto week loaded from official site!");
-    } catch (error) {
-        alert("Error loading from official site: " + error.message + "\nFalling back to local JSON.");
-        loadLocalMatches(); // Your fallback function
-    }
-}
-
 // Enable/disable Check CSV button when file is selected
 document.addEventListener("DOMContentLoaded", function() {
     const fileInput = document.getElementById("csvFileInput");
@@ -464,6 +409,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
 
 
 
