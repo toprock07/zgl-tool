@@ -409,10 +409,3 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
-
-
-
-
-
-
-
