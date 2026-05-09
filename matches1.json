@@ -1,78 +1,77 @@
 [
   {
     "match": 1,
-    "home": "Koc",
-    "away": "Antalyaspor"
-  },
-  {
-    "match": 2,
-    "home": "Konyaspor",
+    "home": "Alanyaspor",
     "away": "Kayserispor"
   },
   {
+    "match": 2,
+    "home": "Başakşehir",
+    "away": "Samsunspor"
+  },
+  {
     "match": 3,
-    "home": "Eyüpspor",
-    "away": "Fenerbahçe A.Ş."
+    "home": "Beşiktaş",
+    "away": "Trabzonspor"
   },
   {
     "match": 4,
-    "home": "Beşiktaş A.Ş.",
-    "away": "Çaykur Rizespor A.Ş."
+    "home": "Eyüpspor",
+    "away": "Rizespor"
   },
   {
     "match": 5,
-    "home": "Alanyaspor",
-    "away": "Fatih Karagümrük"
+    "home": "Galatasaray",
+    "away": "Antalyaspor"
   },
   {
     "match": 6,
-    "home": "Başakşehir FK",
-    "away": "Gaziantep F.K. A.Ş."
+    "home": "Gençlerbirliği",
+    "away": "Kasımpaşa"
   },
   {
     "match": 7,
-    "home": "Galatasaray A.Ş.",
-    "away": "Kasımpaşa A.Ş."
+    "home": "Göztepe",
+    "away": "Gaziantep FK"
   },
   {
     "match": 8,
-    "home": "Göztepe A.Ş.",
-    "away": "Samsunspor A.Ş."
+    "home": "Kocaelispor",
+    "away": "Fatih Karagümrük"
   },
   {
     "match": 9,
-    "home": "Gençlerbirliği",
-    "away": "Trabzonspor A.Ş."
+    "home": "Konyaspor",
+    "away": "Fenerbahçe"
   },
   {
     "match": 10,
-    "home": "Leipzig",
-    "away": "B. Leverkusen"
+    "home": "Stuttgart",
+    "away": "Bayer Leverkusen"
   },
   {
     "match": 11,
-    "home": "Tottenham",
-    "away": "Liverpool"
+    "home": "Monaco",
+    "away": "Lille"
   },
   {
     "match": 12,
-    "home": "Aston Villa",
-    "away": "Manchester United"
+    "home": "Liverpool",
+    "away": "Chelsea"
   },
   {
     "match": 13,
-    "home": "Villarreal",
-    "away": "Barcelona"
+    "home": "Real Sociedad",
+    "away": "Real Betis"
   },
   {
     "match": 14,
-    "home": "Real Betis",
-    "away": "Getafe"
+    "home": "Barcelona",
+    "away": "Real Madrid"
   },
   {
     "match": 15,
-    "home": "Juventus",
-    "away": "AS Roma"
+    "home": "Lazio",
+    "away": "Inter"
   }
-
 ]
